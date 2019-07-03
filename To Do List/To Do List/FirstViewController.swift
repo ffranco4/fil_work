@@ -21,6 +21,7 @@ class FirstViewController: UIViewController, UITableViewDelegate,UITableViewData
         return cell
     }
     
+  
     @IBOutlet weak var table: UITableView!
     
     var tasklist: [String] = []
@@ -39,6 +40,15 @@ class FirstViewController: UIViewController, UITableViewDelegate,UITableViewData
     }
         
           table.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+        tasklist.remove(at: indexPath.row)
+        table.reloadData()
+            UserDefaults.standard.set(tasklist, forKey: "tasklist")
+    }
     }
     
     
